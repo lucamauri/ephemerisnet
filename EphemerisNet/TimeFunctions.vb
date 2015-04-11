@@ -243,7 +243,7 @@
 
         Return MiscFunctions.TimeFromHours(Theta)
     End Function
-    Public Function RANutation(ByVal DeltaPsi As Double) As Double
+    'Public Function RANutation(ByVal DeltaPsi As Double) As Double
 
-    End Function
+    'End Function
 End Class

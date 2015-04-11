@@ -61,7 +61,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clsInput.vb" />
+    <Compile Include="BaseWorker.vb" />
     <Compile Include="CommonResources.vb" />
     <Compile Include="CoordinatesWorker.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
