@@ -168,61 +168,68 @@
     ''' <param name="Year"></param>
     ''' <returns>A Date object containing the full date of the easter for the given year</returns>
     ''' <remarks>The function automatically distinguish between Julian and Gregorian calendar</remarks>
-    Public Function EasterDate(ByVal Year As Integer) As Date
+    Public Function EasterDate(ByVal Year As Integer) As DateTime
         Dim a, b, c, d, e, f, g, h, i, k, l, m, n, p As Double
         Dim Day As Integer
         Dim Month As Integer
-        Dim FullData As New Date
+        Dim FinalDate As New DateTime
 
-        If Year < 1583 Then
-            'Julian Calendar
-            a = Year Mod 4
+        Select Case Year
+            Case Is < 0
+                'Returns Easter for 325 AD (First Council of Nicaea)
+                Year = 325
+                Month = 4
+                Day = 18
+            Case Is < 1583
+                'Julian Calendar
+                a = Year Mod 4
 
-            b = Year Mod 7
+                b = Year Mod 7
 
-            c = Year Mod 19
+                c = Year Mod 19
 
-            d = (19 * c + 15) Mod 30
+                d = (19 * c + 15) Mod 30
 
-            e = (2 * a + 4 * b - d + 34) Mod 7
+                e = (2 * a + 4 * b - d + 34) Mod 7
 
-            f = Math.Floor((d + e + 114) / 31)
-            g = (d + e + 114) Mod 31
+                f = Math.Floor((d + e + 114) / 31)
+                g = (d + e + 114) Mod 31
 
-            Day = g + 1
-            Month = f
-        Else
-            'Gregorian Calendar
-            a = Year Mod 19
+                Day = g + 1
+                Month = f
+            Case Else
+                'Gregorian Calendar
+                a = Year Mod 19
 
-            b = Math.Floor(Year / 100)
-            c = Year Mod 100
+                b = Math.Floor(Year / 100)
+                c = Year Mod 100
 
-            d = Math.Floor(b / 4)
-            e = b Mod 4
+                d = Math.Floor(b / 4)
+                e = b Mod 4
 
-            f = Math.Floor((b + 8) / 25)
+                f = Math.Floor((b + 8) / 25)
 
-            g = Math.Floor((b - f + 1) / 3)
+                g = Math.Floor((b - f + 1) / 3)
 
-            h = (19 * a + b - d - g + 15) Mod 30
+                h = (19 * a + b - d - g + 15) Mod 30
 
-            i = Math.Floor(c / 4)
-            k = c Mod 4
+                i = Math.Floor(c / 4)
+                k = c Mod 4
 
-            l = (32 + 2 * e + 2 * i - h - k) Mod 7
+                l = (32 + 2 * e + 2 * i - h - k) Mod 7
 
-            m = Math.Floor((a + 11 * h + 22 * l) / 451)
+                m = Math.Floor((a + 11 * h + 22 * l) / 451)
 
-            n = Math.Floor((h + l - 7 * m + 114) / 31)
-            p = (h + l - 7 * m + 114) Mod 31
+                n = Math.Floor((h + l - 7 * m + 114) / 31)
+                p = (h + l - 7 * m + 114) Mod 31
 
-            Day = p + 1
-            Month = n
-        End If
+                Day = p + 1
+                Month = n
+        End Select
 
-        FullData = Date.Parse(Year & "-" & Month & "-" & Day)
-        Return FullData
+        FinalDate = Date.Parse(Year.ToString.PadLeft(4, "0") & "-" & Month & "-" & Day)
+        Return FinalDate
+
     End Function
     Public Function SiderealTimeGreenwich(ByVal Instant As DateTime, ByVal IsBC As Boolean) As DateTime
         Dim T As Double
